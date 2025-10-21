@@ -2,9 +2,8 @@
 
 import requests
 import os
-try:
-    os.makedirs("Thumbnails")  
-except FileExistsError:
+
+def thumbnailDownloader():
     videoId = input("Insert youtube video id \n")
     thumbnailUrl = "http://img.youtube.com/vi/"+videoId+"/maxresdefault.jpg"
     response = requests.get(thumbnailUrl)
@@ -16,4 +15,11 @@ except FileExistsError:
         print("Error finding thumbnail, check id and retry.")
     else:
         print('Error downloading thumbnail.')
-input("Hit enter to close.")
+    input("Hit enter to close.")
+    
+try:
+    print("'Thumbnails' folder not found, it will be created now.")
+    os.makedirs("Thumbnails")  
+    thumbnailDownloader()
+except FileExistsError:
+    thumbnailDownloader()
